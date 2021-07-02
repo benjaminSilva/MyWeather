@@ -1,4 +1,4 @@
-package com.bsoftwares.myweather.ui
+package com.bsoftwares.myweather.ui.first
 
 import android.app.Application
 import androidx.lifecycle.*
@@ -12,12 +12,16 @@ class FirstFragmentViewModel(application: Application) : AndroidViewModel(applic
     private val viewModelScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
     val repository = Repository()
 
-    private val dataState = MutableLiveData<ApiState>()
+    private val dataState = MutableLiveData<ApiState>(ApiState.Sleep)
     val dataStateLD: LiveData<ApiState>
         get() = dataState
 
+    val city = MutableLiveData<String>()
 
-    fun getWeatherFlow(city: String) {
+    val errorMessage = MutableLiveData<String>()
+
+
+    fun getWeatherFlow(city : String) {
         viewModelScope.launch {
             repository.loadDataFlow(city).collect {
                 dataState.postValue(it)
@@ -25,15 +29,13 @@ class FirstFragmentViewModel(application: Application) : AndroidViewModel(applic
         }
     }
 
+    init {
+        errorMessage.postValue("")
+    }
+
     fun apiSleep() {
         dataState.postValue(ApiState.Sleep)
     }
-
-    /*fun getWeather(city: String) {
-        viewModelScope.launch {
-            repository.loadData(city)
-        }
-    }*/
 
     class Factory(val app: Application) : ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {

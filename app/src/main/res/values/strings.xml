@@ -14,5 +14,5 @@
     <string name="feels_like">Feels like %1$.0f°</string>
     <string name="only_temp">%1$.0f°</string>
     <string name="clouds">Clouds</string>
-    <string name="existing_city">Type an existing city</string>
+    <string name="error_existing_city">Type an existing city</string>
 </resources>

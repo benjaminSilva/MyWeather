@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="com.bsoftwares.myweather.ui.FirstFragment"
+        android:name="com.bsoftwares.myweather.ui.first.FirstFragment"
         tools:layout="@layout/fragment_first">
 
         <action
