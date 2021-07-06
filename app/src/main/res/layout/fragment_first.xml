@@ -12,7 +12,8 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.first.FirstFragment">
+        tools:context=".ui.first.FirstFragment"
+        android:animateLayoutChanges="true">
 
         <Button
             android:id="@+id/button_first"
@@ -37,6 +38,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed"
+            listener="@{viewModel.test}"
             errorMessage="@{viewModel.dataStateLD}">
 
             <EditText
@@ -46,7 +48,8 @@
                 android:ems="10"
                 android:text="@={viewModel.city}"
                 android:inputType="textPersonName"
-                android:hint="@string/city_name" />
+                android:hint="@string/city_name"
+                inputLayout="@{tietCity}" />
 
 
         </com.google.android.material.textfield.TextInputLayout>

@@ -10,7 +10,9 @@ import android.view.Menu
 import android.view.MenuItem
 import com.bsoftwares.myweather.R
 import com.bsoftwares.myweather.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration

@@ -1,9 +1,12 @@
 package com.bsoftwares.myweather.utils
 
-import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
+import androidx.core.os.bundleOf
+import androidx.core.widget.addTextChangedListener
 import androidx.databinding.BindingAdapter
-import com.bsoftwares.myweather.ApiState
+import androidx.navigation.findNavController
+import com.bsoftwares.myweather.model.ApiState
 import com.bsoftwares.myweather.R
 import com.google.android.material.textfield.TextInputLayout
 
@@ -20,11 +23,21 @@ fun ImageView.loadImage(weather : String) {
     }
 }
 
-@BindingAdapter("errorMessage")
-fun TextInputLayout.errorMessage(state : ApiState){
+@BindingAdapter("errorMessage", "listener")
+fun TextInputLayout.errorMessage(state : ApiState, listener: () -> Unit){
     isErrorEnabled = state is ApiState.Error
     when(state){
+        is ApiState.Success -> {
+            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment,bundleOf("days" to state.data))
+            listener.invoke()
+        }
         is ApiState.Error -> error = context.getString(R.string.error_existing_city)
-        else -> error = null
+    }
+}
+
+@BindingAdapter("inputLayout")
+fun EditText.changeListener(inputLayout : TextInputLayout){
+    addTextChangedListener {
+        inputLayout.error = null
     }
 }

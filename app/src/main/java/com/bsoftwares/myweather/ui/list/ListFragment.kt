@@ -1,7 +1,6 @@
 package com.bsoftwares.myweather.ui.list
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,13 +10,6 @@ import androidx.navigation.fragment.findNavController
 import com.bsoftwares.myweather.R
 import com.bsoftwares.myweather.databinding.FragmentListBinding
 import com.bsoftwares.myweather.model.Data
-import com.bsoftwares.myweather.network.Network
-import com.bsoftwares.myweather.utils.API_KEY
-import com.bsoftwares.myweather.utils.UNIT_SYSTEM
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class ListFragment : Fragment() {
 

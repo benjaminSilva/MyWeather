@@ -2,15 +2,17 @@ package com.bsoftwares.myweather.ui.first
 
 import android.app.Application
 import androidx.lifecycle.*
-import com.bsoftwares.myweather.ApiState
-import com.bsoftwares.myweather.repository.Repository
+import com.bsoftwares.myweather.model.ApiState
+import com.bsoftwares.myweather.repository.WeatherRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collect
+import javax.inject.Inject
 
-class FirstFragmentViewModel(application: Application) : AndroidViewModel(application) {
+@HiltViewModel
+class FirstFragmentViewModel @Inject constructor(private val weatherRepo : WeatherRepository) : ViewModel() {
 
     private val viewModelScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
-    val repository = Repository()
 
     private val dataState = MutableLiveData<ApiState>(ApiState.Sleep)
     val dataStateLD: LiveData<ApiState>
@@ -20,10 +22,12 @@ class FirstFragmentViewModel(application: Application) : AndroidViewModel(applic
 
     val errorMessage = MutableLiveData<String>()
 
+    val test : Function0<Unit> = { apiSleep() }
+
 
     fun getWeatherFlow(city : String) {
         viewModelScope.launch {
-            repository.loadDataFlow(city).collect {
+            weatherRepo.loadDataFlow(city).collect {
                 dataState.postValue(it)
             }
         }
@@ -35,15 +39,5 @@ class FirstFragmentViewModel(application: Application) : AndroidViewModel(applic
 
     fun apiSleep() {
         dataState.postValue(ApiState.Sleep)
-    }
-
-    class Factory(val app: Application) : ViewModelProvider.Factory {
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            if (modelClass.isAssignableFrom(FirstFragmentViewModel::class.java)) {
-                @Suppress("UNCHECKED_CAST")
-                return FirstFragmentViewModel(app) as T
-            }
-            throw IllegalArgumentException("Unable to construct ViewModel")
-        }
     }
 }

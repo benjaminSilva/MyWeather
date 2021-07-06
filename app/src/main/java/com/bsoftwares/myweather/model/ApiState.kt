@@ -1,6 +1,4 @@
-package com.bsoftwares.myweather
-
-import com.bsoftwares.myweather.model.Data
+package com.bsoftwares.myweather.model
 
 sealed class ApiState {
     data class Success(val data: Data) : ApiState()
