@@ -18,19 +18,19 @@ class FirstFragment : Fragment() {
 
     private val binding get() = _binding!!
 
-    //private val viewModel: FirstFragmentViewModel by activityViewModels { FirstFragmentViewModel.Factory() }
 
-    private val viewModel: FirstFragmentViewModel by viewModels()
+
+    private val viewModelFrag : FirstFragmentViewModel by viewModels()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentFirstBinding.inflate(inflater, container, false)
-        binding.viewModel = viewModel
-        binding.lifecycleOwner = viewLifecycleOwner
-        return binding.root
-    }
+    ) = FragmentFirstBinding.inflate(inflater, container, false).apply {
+        lifecycleOwner = viewLifecycleOwner
+        viewModel = viewModelFrag
+    }.root
+
 
     override fun onDestroyView() {
         super.onDestroyView()

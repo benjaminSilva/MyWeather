@@ -14,9 +14,6 @@ import com.bsoftwares.myweather.model.Data
 class ListFragment : Fragment() {
 
     private var _binding: FragmentListBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
 
@@ -29,9 +26,12 @@ class ListFragment : Fragment() {
 
     }
 
-    val adapter = WeatherAdapter(WeatherListener { day ->
-        findNavController().navigate(R.id.action_SecondFragment_to_detailsFragment,bundleOf(Pair("day",day)))
-    })
+    private val adapter = WeatherAdapter { day ->
+        findNavController().navigate(
+            R.id.action_SecondFragment_to_detailsFragment,
+            bundleOf(Pair("day", day))
+        )
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

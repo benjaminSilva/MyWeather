@@ -3,6 +3,7 @@ package com.bsoftwares.myweather.ui.first
 import android.app.Application
 import androidx.lifecycle.*
 import com.bsoftwares.myweather.model.ApiState
+import com.bsoftwares.myweather.repository.RepositoryInterface
 import com.bsoftwares.myweather.repository.WeatherRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
@@ -10,7 +11,7 @@ import kotlinx.coroutines.flow.collect
 import javax.inject.Inject
 
 @HiltViewModel
-class FirstFragmentViewModel @Inject constructor(private val weatherRepo : WeatherRepository) : ViewModel() {
+class FirstFragmentViewModel @Inject constructor(private val weatherRepo : RepositoryInterface) : ViewModel() {
 
     private val viewModelScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
 
@@ -19,8 +20,6 @@ class FirstFragmentViewModel @Inject constructor(private val weatherRepo : Weath
         get() = dataState
 
     val city = MutableLiveData<String>()
-
-    val errorMessage = MutableLiveData<String>()
 
     val test : Function0<Unit> = { apiSleep() }
 
@@ -31,10 +30,6 @@ class FirstFragmentViewModel @Inject constructor(private val weatherRepo : Weath
                 dataState.postValue(it)
             }
         }
-    }
-
-    init {
-        errorMessage.postValue("")
     }
 
     fun apiSleep() {

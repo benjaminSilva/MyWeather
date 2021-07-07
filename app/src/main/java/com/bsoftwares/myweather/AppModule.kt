@@ -1,6 +1,8 @@
 package com.bsoftwares.myweather
 
-import com.bsoftwares.myweather.network.WeateherApi
+import com.bsoftwares.myweather.network.WeatherApi
+import com.bsoftwares.myweather.repository.RepositoryInterface
+import com.bsoftwares.myweather.repository.WeatherRepository
 import com.bsoftwares.myweather.utils.BASE_URL
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import dagger.Module
@@ -25,6 +27,9 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideAPI(retrofit: Retrofit) = retrofit.create(WeateherApi::class.java)
+    fun provideAPI(retrofit: Retrofit) = retrofit.create(WeatherApi::class.java)
 
+    @Singleton
+    @Provides
+    fun provideRepository(weatherApi : WeatherApi) = WeatherRepository(weatherApi) as RepositoryInterface
 }

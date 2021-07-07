@@ -30,8 +30,9 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tiet_city"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="20dp"
             app:layout_constraintBottom_toTopOf="@+id/button_first"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -41,11 +42,12 @@
             listener="@{viewModel.test}"
             errorMessage="@{viewModel.dataStateLD}">
 
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_city"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
+                android:textAlignment="center"
                 android:text="@={viewModel.city}"
                 android:inputType="textPersonName"
                 android:hint="@string/city_name"

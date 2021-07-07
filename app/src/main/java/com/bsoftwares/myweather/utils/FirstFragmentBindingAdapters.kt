@@ -39,5 +39,6 @@ fun TextInputLayout.errorMessage(state : ApiState, listener: () -> Unit){
 fun EditText.changeListener(inputLayout : TextInputLayout){
     addTextChangedListener {
         inputLayout.error = null
+        inputLayout.isErrorEnabled = false
     }
 }

@@ -11,13 +11,13 @@ import com.bsoftwares.myweather.databinding.FragmentDetailsBinding
 import com.bsoftwares.myweather.databinding.FragmentListBinding
 import com.bsoftwares.myweather.model.Day
 
-class DetailsFragment : Fragment() {
+class DetailsFragment : Fragment(R.layout.fragment_details) {
 
-    private var _binding: FragmentDetailsBinding? = null
-    private val binding get() = _binding!!
+    /*private var _binding: FragmentDetailsBinding? = null
+    private val binding get() = _binding!!*/
+    private lateinit var binding: FragmentDetailsBinding
 
-
-    override fun onCreateView(
+    /*override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
@@ -25,10 +25,11 @@ class DetailsFragment : Fragment() {
         _binding = FragmentDetailsBinding.inflate(inflater, container, false)
         return binding.root
 
-    }
+    }*/
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding = FragmentDetailsBinding.bind(view)
         val day = arguments?.getParcelable<Day>("day")
         binding.data = day
     }

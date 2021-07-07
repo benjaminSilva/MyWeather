@@ -1,53 +1,53 @@
 package com.bsoftwares.myweather.ui.list
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bsoftwares.myweather.R
 import com.bsoftwares.myweather.databinding.ItemWeatherDayBinding
 import com.bsoftwares.myweather.model.Day
 
-class WeatherAdapter(val clickListener: WeatherListener) :
-    ListAdapter<Day, WeatherAdapter.GincanaViewHolder>(SearchDiffCallback()) {
+class WeatherAdapter(val clickListener: (data: Day) -> Unit) :
+    ListAdapter<Day, WeatherAdapter.WeatherViewHolder>(SearchDiffCallback()) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GincanaViewHolder {
-        return GincanaViewHolder.from(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WeatherViewHolder {
+        return WeatherViewHolder.from(
             parent
-        )
+        ).also { holder ->
+            holder.itemView.setOnClickListener {
+                clickListener.invoke(getItem(holder.adapterPosition))
+            }
+        }
     }
 
-    override fun onBindViewHolder(holder: GincanaViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: WeatherViewHolder, position: Int) {
         val item = getItem(position)
 
         try {
             if (item.dt_txt.length > 5)
                 item.dt_txt = item.dt_txt.substring(5, 16)
-        }catch (e : StringIndexOutOfBoundsException){
+        } catch (e: StringIndexOutOfBoundsException) {
 
         }
 
-        holder.bind(item, clickListener)
+        holder.bind(item)
     }
 
-    class GincanaViewHolder private constructor(val binding: ItemWeatherDayBinding) :
+    class WeatherViewHolder private constructor(val binding: ItemWeatherDayBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(
-            item: Day,
-            clickListener: WeatherListener,
+            item: Day
         ) {
-            binding.clickListener = clickListener
             binding.data = item
         }
 
         companion object {
-            fun from(parent: ViewGroup): GincanaViewHolder {
+            fun from(parent: ViewGroup): WeatherViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = ItemWeatherDayBinding.inflate(layoutInflater, parent, false)
-                return GincanaViewHolder(
+                return WeatherViewHolder(
                     binding
                 )
             }
@@ -72,10 +72,3 @@ class WeatherAdapter(val clickListener: WeatherListener) :
 
     }
 }
-
-class WeatherListener(val clickListener: (data: Day) -> Unit) {
-    fun onClick(data: Day) {
-        return clickListener(data)
-    }
-}
-
