@@ -16,7 +16,7 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 @HiltAndroidTest
-class FirstFragmentViewModelTestUi{
+class WeatherViewModelTestUi{
 
     @get:Rule
     var hiltRule = HiltAndroidRule(this)

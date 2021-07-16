@@ -5,50 +5,25 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.bsoftwares.myweather.R
 import com.bsoftwares.myweather.databinding.FragmentListBinding
-import com.bsoftwares.myweather.model.Data
+import com.bsoftwares.myweather.ui.first.WeatherViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ListFragment : Fragment() {
 
-    private var _binding: FragmentListBinding? = null
-    private val binding get() = _binding!!
-
+    private val viewModelFrag: WeatherViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentListBinding.inflate(inflater, container, false)
-        return binding.root
+    ): View = FragmentListBinding.inflate(inflater, container, false).apply {
+        activity?.title = viewModelFrag.city.value
+        lifecycleOwner = viewLifecycleOwner
+        viewModel = viewModelFrag
+    }.root
 
-    }
-
-    private val adapter = WeatherAdapter { day ->
-        findNavController().navigate(
-            R.id.action_SecondFragment_to_detailsFragment,
-            bundleOf(Pair("day", day))
-        )
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        binding.rvDays.adapter = adapter
-
-        val city = arguments?.getParcelable<Data>("days")
-        if (city != null) {
-            activity?.title = city.city.name
-            adapter.submitList(city.list)
-        }
-    }
-
-
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 }

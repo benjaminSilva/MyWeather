@@ -6,12 +6,9 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
-import android.view.Menu
-import android.view.MenuItem
 import com.bsoftwares.myweather.R
 import com.bsoftwares.myweather.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.HiltAndroidApp
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {

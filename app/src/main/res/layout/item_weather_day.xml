@@ -6,7 +6,7 @@
     <data>
         <variable
             name="data"
-            type="com.bsoftwares.myweather.model.Day" />
+            type="com.bsoftwares.myweather.database.DayDB" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginBottom="5dp"
-            android:text="@{data.weather[0].main}"
+            android:text="@{data.main}"
             android:textSize="20sp"
             app:layout_constraintBottom_toTopOf="@+id/tv_date"
             app:layout_constraintEnd_toStartOf="@+id/tv_temperature"
@@ -38,7 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="@{String.format(@string/temp,data.main.temp)}"
+            android:text="@{String.format(@string/temp,data.temp)}"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="@+id/imageView"
             app:layout_constraintEnd_toEndOf="parent"
@@ -47,7 +47,7 @@
 
         <ImageView
             android:id="@+id/imageView"
-            loadImage="@{data.weather[0].description}"
+            loadImage="@{data.description}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"

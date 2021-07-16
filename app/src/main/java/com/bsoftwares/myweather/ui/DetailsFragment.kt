@@ -1,36 +1,28 @@
 package com.bsoftwares.myweather.ui
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import androidx.fragment.app.Fragment
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.navArgs
+import androidx.fragment.app.activityViewModels
 import com.bsoftwares.myweather.R
 import com.bsoftwares.myweather.databinding.FragmentDetailsBinding
 import com.bsoftwares.myweather.databinding.FragmentListBinding
-import com.bsoftwares.myweather.model.Day
+import com.bsoftwares.myweather.ui.first.WeatherViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class DetailsFragment : Fragment(R.layout.fragment_details) {
 
-    /*private var _binding: FragmentDetailsBinding? = null
-    private val binding get() = _binding!!*/
-    private lateinit var binding: FragmentDetailsBinding
+    private val viewModelFrag : WeatherViewModel by activityViewModels()
 
-    /*override fun onCreateView(
+    override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View = FragmentDetailsBinding.inflate(inflater, container, false).apply {
+        lifecycleOwner = viewLifecycleOwner
+        data = viewModelFrag.day.value
+    }.root
 
-        _binding = FragmentDetailsBinding.inflate(inflater, container, false)
-        return binding.root
-
-    }*/
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        binding = FragmentDetailsBinding.bind(view)
-        val day = arguments?.getParcelable<Day>("day")
-        binding.data = day
-    }
 }

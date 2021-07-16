@@ -81,7 +81,19 @@ dependencies {
     def test_version = "1.4.0"
     androidTestImplementation "androidx.test:core-ktx:$test_version"
     testImplementation "androidx.arch.core:core-testing:2.1.0"
-    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.2.1"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.0"
     testImplementation "com.google.truth:truth:1.0.1"
     testImplementation "org.mockito:mockito-core:2.21.0"
+
+    //Room
+    implementation "androidx.room:room-runtime:2.3.0"
+    kapt "androidx.room:room-compiler:2.3.0"
+
+    // Kotlin Extensions and Coroutines support for Room
+    implementation "androidx.room:room-ktx:2.3.0"
+
+    implementation "androidx.preference:preference-ktx:1.1.1"
+    implementation "androidx.datastore:datastore:1.0.0-rc01"
+    implementation "androidx.datastore:datastore-preferences:1.0.0-rc01"
+
 }

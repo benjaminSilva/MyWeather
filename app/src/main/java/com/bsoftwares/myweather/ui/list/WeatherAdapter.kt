@@ -5,11 +5,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bsoftwares.myweather.database.DayDB
 import com.bsoftwares.myweather.databinding.ItemWeatherDayBinding
 import com.bsoftwares.myweather.model.Day
 
-class WeatherAdapter(val clickListener: (data: Day) -> Unit) :
-    ListAdapter<Day, WeatherAdapter.WeatherViewHolder>(SearchDiffCallback()) {
+class WeatherAdapter(private val clickListener: (data: DayDB) -> Unit) :
+    ListAdapter<DayDB, WeatherAdapter.WeatherViewHolder>(SearchDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WeatherViewHolder {
         return WeatherViewHolder.from(
@@ -38,7 +39,7 @@ class WeatherAdapter(val clickListener: (data: Day) -> Unit) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(
-            item: Day
+            item: DayDB
         ) {
             binding.data = item
         }
@@ -55,17 +56,17 @@ class WeatherAdapter(val clickListener: (data: Day) -> Unit) :
 
     }
 
-    class SearchDiffCallback : DiffUtil.ItemCallback<Day>() {
+    class SearchDiffCallback : DiffUtil.ItemCallback<DayDB>() {
         override fun areItemsTheSame(
-            oldItem: Day,
-            newItem: Day
+            oldItem: DayDB,
+            newItem: DayDB
         ): Boolean {
             return oldItem.dt == newItem.dt
         }
 
         override fun areContentsTheSame(
-            oldItem: Day,
-            newItem: Day
+            oldItem: DayDB,
+            newItem: DayDB
         ): Boolean {
             return oldItem == newItem
         }

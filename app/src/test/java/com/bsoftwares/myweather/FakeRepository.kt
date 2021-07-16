@@ -1,6 +1,7 @@
 package com.bsoftwares.myweather
 
 import android.util.Log
+import com.bsoftwares.myweather.database.DayDB
 import com.bsoftwares.myweather.model.ApiState
 import com.bsoftwares.myweather.model.City
 import com.bsoftwares.myweather.model.Data
@@ -18,15 +19,17 @@ class FakeRepository() : RepositoryInterface {
 
     override suspend fun loadDataFlow(city: String) = flow {
         emit(ApiState.Loading)
-        /*try {
-            val data = weatherApi.getWeather(city, API_KEY, UNIT_SYSTEM).await()
-            emit(ApiState.Success(data))
-        } catch (e: HttpException) {
-            emit(ApiState.Error(e.message()))
-            Log.e("ERROR", e.message.toString())
-        }*/
+
         if (city == "Boston")
-            emit(ApiState.Success(Data(listOf(),City("Boston"))))
+            emit(ApiState.Success(listOf(
+                DayDB("Boston",72F,77F,"Cloudy","Few Clouds","Tomorrow",1),
+                DayDB("Boston",72F,77F,"Cloudy","Few Clouds","Tomorrow",2),
+                DayDB("Boston",72F,77F,"Cloudy","Few Clouds","Tomorrow",3),
+                DayDB("Boston",72F,77F,"Cloudy","Few Clouds","Tomorrow",4),
+                DayDB("Boston",72F,77F,"Cloudy","Few Clouds","Tomorrow",5),
+                DayDB("Boston",72F,77F,"Cloudy","Few Clouds","Tomorrow",6),
+                DayDB("Boston",72F,77F,"Cloudy","Few Clouds","Tomorrow",7)
+            )))
         else
             emit(ApiState.Error("Error"))
     }

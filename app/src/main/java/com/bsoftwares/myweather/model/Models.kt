@@ -1,6 +1,8 @@
 package com.bsoftwares.myweather.model
 
 import android.os.Parcelable
+import androidx.lifecycle.Transformations.map
+import com.bsoftwares.myweather.database.DayDB
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
@@ -33,3 +35,17 @@ data class Weather(
     val main: String,
     val description: String
 ) : Parcelable
+
+fun Data.toEntity() : List<DayDB> {
+    return list.mapIndexed{ index, data ->
+        DayDB(
+            city = city.name,
+            temp = data.main.temp,
+            feels_like = data.main.feels_like,
+            main = data.weather[0].main,
+            description = data.weather[0].description,
+            dt = index,
+            dt_txt = data.dt_txt
+        )
+    }
+}

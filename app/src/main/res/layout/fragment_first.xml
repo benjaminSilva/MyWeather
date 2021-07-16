@@ -4,7 +4,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.bsoftwares.myweather.ui.first.FirstFragmentViewModel" />
+            type="com.bsoftwares.myweather.ui.first.WeatherViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -39,7 +39,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed"
-            listener="@{viewModel.test}"
+            listener="@{viewModel.updateAfterSuccess}"
             errorMessage="@{viewModel.dataStateLD}">
 
             <com.google.android.material.textfield.TextInputEditText
