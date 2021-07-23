@@ -1,15 +1,15 @@
 package com.bsoftwares.myweather.ui.first
 
-import android.app.Application
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.bsoftwares.myweather.database.DayDB
 import com.bsoftwares.myweather.model.ApiState
-import com.bsoftwares.myweather.model.Day
 import com.bsoftwares.myweather.repository.RepositoryInterface
-import com.bsoftwares.myweather.repository.WeatherRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
 

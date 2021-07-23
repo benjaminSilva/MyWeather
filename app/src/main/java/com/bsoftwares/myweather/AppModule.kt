@@ -1,9 +1,6 @@
 package com.bsoftwares.myweather
 
 import android.content.Context
-import android.content.SharedPreferences
-import androidx.datastore.preferences.preferencesDataStore
-import androidx.preference.PreferenceManager
 import androidx.room.Room
 import com.bsoftwares.myweather.database.WeatherDao
 import com.bsoftwares.myweather.database.WeatherDatabase
@@ -21,7 +18,6 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import javax.inject.Inject
 import javax.inject.Singleton
 
 @Module
